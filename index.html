@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Althea 🎄</title>
+    <style>
+        /* --- THEME SETTINGS --- */
+        :root {
+            --primary-red: #c0392b;
+            --gold: #f1c40f;
+            --card-bg: #fffbf0;
+            --text-color: #3e2723;
+        }
+
+        body {
+            /* Background GIF */
+            background: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2N0NjAzdGg5cDl3MnZ1NW5nY3d3Z3o0Z2p6azU5bncxcTI0dms0dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1xkcbuZNwO2GqGMVZ4/giphy.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* --- SCREENS --- */
+        .content-screen {
+            position: absolute;
+            width: 85%;
+            max-width: 380px;
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 2px solid var(--gold);
+            text-align: center;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 20;
+            box-sizing: border-box;
+        }
+
+        /* --- GIFT HUB --- */
+        #hub-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            pointer-events: none;
+        }
+
+        .gift-img {
+            position: absolute;
+            width: 130px;
+            height: auto;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.6));
+            pointer-events: auto;
+        }
+
+        /* Positioning */
+        #gift-btn-1 { bottom: 12%; left: 15%; transform: rotate(-5deg); z-index: 2; }
+        #gift-btn-2 { bottom: 18%; right: 18%; width: 110px; transform: rotate(8deg); z-index: 1; }
+        #gift-btn-3 { bottom: 8%; left: 50%; width: 150px; transform: translateX(-50%) rotate(-2deg); z-index: 3; }
+
+        /* Hover Effects */
+        #gift-btn-1:hover { transform: rotate(-5deg) translateY(-15px) scale(1.05); }
+        #gift-btn-2:hover { transform: rotate(8deg) translateY(-15px) scale(1.05); }
+        #gift-btn-3:hover { transform: translateX(-50%) rotate(-2deg) translateY(-15px) scale(1.05); }
+
+        /* Animation for Opening */
+        .gift-img.opening {
+            animation: openBoxAnim 0.8s forwards ease-in-out !important;
+            pointer-events: none;
+        }
+
+        @keyframes openBoxAnim {
+             0% { transform: scale(1) rotate(0); }
+             10% { transform: scale(1.1) rotate(-10deg); }
+             20% { transform: scale(1.1) rotate(10deg); }
+             30% { transform: scale(1.1) rotate(-10deg); }
+             40% { transform: scale(1.1) rotate(10deg); }
+             50% { transform: scale(1.2) rotate(0); opacity: 1; }
+             100% { transform: scale(2) translateY(-100px); opacity: 0; filter: brightness(3); }
+        }
+
+        /* --- GENERAL ELEMENTS --- */
+        h1 { color: var(--primary-red); margin: 0 0 15px 0; font-size: 1.8rem; }
+        p { color: var(--text-color); line-height: 1.6; font-size: 1.1rem; margin: 10px 0; }
+        
+        .start-btn {
+            background: var(--primary-red);
+            color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: bold;
+        }
+
+        .highlight { color: var(--primary-red); font-weight: bold; background: #ffebee; padding: 2px 8px; border-radius: 5px; }
+
+        .back-btn {
+            background: white; border: 2px solid var(--primary-red); color: var(--primary-red); padding: 10px 25px;
+            border-radius: 20px; margin-top: 25px; cursor: pointer; font-weight: bold;
+        }
+
+        /* --- MUSIC PLAYER STYLES --- */
+        .music-card-content { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Updated for GIF display */
+        .album-cover {
+            width: 100%; max-width: 280px; height: 280px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            object-fit: cover;
+            margin-bottom: 20px;
+            background: #000; /* Placeholder color while loading */
+        }
+
+        .music-info { text-align: center; margin-bottom: 10px; }
+
+        .progress-container { width: 100%; height: 5px; background: #e0e0e0; border-radius: 5px; margin: 15px 0; position: relative; overflow: hidden;}
+        .progress-bar { height: 100%; background: var(--gold); width: 0%; border-radius: 5px; transition: width 0.2s; }
+        .playing .progress-bar { width: 100%; transition: width 180s linear; }
+        
+        .time-codes { width: 100%; display: flex; justify-content: space-between; font-size: 0.8rem; color: #777; }
+
+        .player-controls {
+            display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 20px;
+        }
+        .ctrl-btn-side { font-size: 1.5rem; color: #aaa; cursor: default; }
+        .play-pause-btn {
+            width: 70px; height: 70px; background: var(--primary-red); border-radius: 50%; color: white;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.4); border: none;
+        }
+
+        /* --- MWEHEHE BUTTON --- */
+        .mwehehe-btn {
+            background: #8e44ad; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-size: 1rem; font-weight: bold;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(142, 68, 173, 0.4); margin: 10px 0; animation: pulse 2s infinite;
+        }
+
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+
+<audio id="bgm" loop><source src="https://www.dropbox.com/scl/fi/38v6jhgkga5eb41hgdzqe/5-lights-christmas-bgm-277802.mp3?rlkey=92njymmctreg18v99v1oiwtye&st=joaztuc7&raw=1" type="audio/mp3"></audio>
+<audio id="goldenHour"><source src="https://www.dropbox.com/scl/fi/5oo7wdaye9oqeo3nvmxg7/Golden-Hour.mp3?rlkey=6itnkje9o3ate6dajoyqo3h5b&st=sgw2en2q&raw=1" type="audio/mp3"></audio>
+<audio id="mweheheAudio"><source src="https://www.dropbox.com/scl/fi/m6ym0ibh0l4dvc2f6p9ph/WhatsApp-Audio-2025-12-25-at-9.22.37-PM-online-video-cutter.com.mp3?rlkey=o2khzh3zioj1cv1dpf444ylam&st=pbx6811x&raw=1" type="audio/mp3"></audio>
+
+<div class="container">
+
+    <div class="content-screen" id="intro" style="display: flex;">
+        <h1>Hey Althea 🎄</h1>
+        <img src="https://media.tenor.com/CMi8MQ1d6-MAAAAM/christmas-cat.gif" style="width: 180px; border-radius: 15px; margin-bottom: 20px;">
+        <p>I have a surprise for you.</p>
+        <p style="font-size: 0.9rem; opacity: 0.8;">(Turn volume up 🔊)</p>
+        <button class="start-btn" onclick="startExperience()">Open Gift</button>
+    </div>
+
+    <div id="hub-screen">
+        <img src="https://pngimg.com/uploads/gift/gift_PNG5946.png" class="gift-img" id="gift-btn-1" onclick="triggerOpen(1)">
+        <img src="https://pngimg.com/uploads/gift/gift_PNG5952.png" class="gift-img" id="gift-btn-2" onclick="triggerOpen(2)">
+        <img src="https://pngimg.com/uploads/gift/gift_PNG5955.png" class="gift-img" id="gift-btn-3" onclick="triggerOpen(3)">
+    </div>
+
+    <div class="content-screen" id="gift1">
+        <h2 style="color:var(--primary-red)">My Note</h2>
+        <div style="text-align: left; background: #fff; padding: 20px; border-radius: 15px; border: 1px dashed #ccc; width: 100%; box-sizing: border-box;">
+            <p>Dear <span class="highlight">Althea</span>,</p>
+            <p>Christmas feels a little warmer this year, and I think that's your fault (in a good way). 😉</p>
+            <p>You bring so much comfort and light into my world just by being you.</p>
+        </div>
+        <button class="back-btn" onclick="goBackToHub()">Close Box</button>
+    </div>
+
+    <div class="content-screen" id="gift2">
+        <div class="music-card-content">
+            <img src="https://media.tenor.com/Mu5ivBULfHUAAAA1/dvdhult-original-vid-tiktok.webp" class="album-cover" alt="Vibing Cat">
+            
+            <div class="music-info">
+                <p style="font-size: 1.2rem; color: var(--primary-red); margin: 10px 0;">...here this song for you <3</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progBar"></div>
+            </div>
+            <div class="time-codes">
+                <span>0:00</span><span>3:48</span>
+            </div>
+
+            <div class="player-controls">
+                <span class="ctrl-btn-side">⏮</span>
+                <button class="play-pause-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+                <span class="ctrl-btn-side">⏭</span>
+            </div>
+        </div>
+        <button class="back-btn" onclick="goBackToHub()" style="margin-top: 15px; background: transparent; border: none; color: #999; font-size: 0.9rem;">Go Back</button>
+    </div>
+
+    <div class="content-screen" id="gift3">
+        <h1>The Best Gift...</h1>
+        <p>I was thinking about what the best part of my 2025 was.</p>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTBlbGF2cm9kN2hxa2tnYnE4ZGw3aXo3MjdxZzZyZjJxMmtubWcxMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1JmGiBtqTuehfYxuy9/giphy.gif" style="width:150px; border-radius:15px; margin: 15px 0;">
+        <p>Honestly? It was becoming friends with you.</p>
+        <button class="mwehehe-btn" onclick="toggleMwehehe()">🔊 MWEHEHEHE...</button>
+        <p class="highlight" style="margin-top: 20px;">Merry Christmas, Althea. ❤️</p>
+        <button class="back-btn" onclick="location.reload()">Replay All 🔄</button>
+    </div>
+
+</div>
+
+<script>
+    // --- VARIABLES ---
+    const bgm = document.getElementById('bgm');
+    const goldenHour = document.getElementById('goldenHour');
+    const mweheheAudio = document.getElementById('mweheheAudio');
+    const playBtn = document.getElementById('playBtn');
+    const musicScreen = document.getElementById('gift2');
+    const progBar = document.getElementById('progBar');
+
+    // --- HELPER: Hide all screens ---
+    function hideAll() {
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('hub-screen').style.display = 'none';
+        document.getElementById('gift1').style.display = 'none';
+        document.getElementById('gift2').style.display = 'none';
+        document.getElementById('gift3').style.display = 'none';
+    }
+
+    // --- 1. START EXPERIENCE ---
+    function startExperience() {
+        hideAll();
+        document.getElementById('hub-screen').style.display = 'block'; 
+        bgm.volume = 0.4;
+        bgm.play().catch(e => console.log("Audio blocked"));
+    }
+
+    // --- 2. OPEN GIFTS ---
+    function triggerOpen(number) {
+        const giftImg = document.getElementById('gift-btn-' + number);
+        giftImg.classList.add('opening');
+        setTimeout(() => {
+            hideAll();
+            document.getElementById('gift' + number).style.display = 'flex';
+            setTimeout(() => giftImg.classList.remove('opening'), 1000);
+        }, 750);
+    }
+
+    function goBackToHub() {
+        hideAll();
+        document.getElementById('hub-screen').style.display = 'block';
+        if(bgm.paused && goldenHour.paused && mweheheAudio.paused) bgm.play();
+    }
+
+    // --- 3. MUSIC PLAYERS ---
+    function toggleMusic() {
+        if (goldenHour.paused) {
+            bgm.pause(); goldenHour.play();
+            playBtn.innerText = "II"; musicScreen.classList.add('playing');
+            progBar.style.width = '100%';
+        } else {
+            goldenHour.pause(); bgm.play();
+            playBtn.innerText = "▶"; musicScreen.classList.remove('playing');
+            progBar.style.width = '0%';
+        }
+    }
+
+    function toggleMwehehe() {
+        if (mweheheAudio.paused) {
+            bgm.pause(); goldenHour.pause(); mweheheAudio.play();
+        } else {
+            mweheheAudio.pause(); bgm.play();
+        }
+    }
+    mweheheAudio.onended = function() { bgm.play(); };
+</script>
+
+</body>
+</html>
