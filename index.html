@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Althea 🎄</title>
+    <meta property="og:title" content="For Althea 🎄">
+    <meta property="og:description" content="A little surprise for you... mwehehe">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sacramento&display=swap" rel="stylesheet">
+
     <style>
         /* --- THEME SETTINGS --- */
         :root {
-            --primary-red: #c0392b;
+            --primary-red: #d32f2f;
             --gold: #f1c40f;
             --card-bg: #fffbf0;
-            --text-color: #3e2723;
+            --rose-text: #ad1457; 
         }
 
         body {
-            /* Background GIF */
             background: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2N0NjAzdGg5cDl3MnZ1NW5nY3d3Z3o0Z2p6azU5bncxcTI0dms0dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1xkcbuZNwO2GqGMVZ4/giphy.gif') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Georgia', serif;
@@ -81,17 +87,14 @@
             pointer-events: auto;
         }
 
-        /* Positioning */
         #gift-btn-1 { bottom: 12%; left: 15%; transform: rotate(-5deg); z-index: 2; }
         #gift-btn-2 { bottom: 18%; right: 18%; width: 110px; transform: rotate(8deg); z-index: 1; }
         #gift-btn-3 { bottom: 8%; left: 50%; width: 150px; transform: translateX(-50%) rotate(-2deg); z-index: 3; }
 
-        /* Hover Effects */
         #gift-btn-1:hover { transform: rotate(-5deg) translateY(-15px) scale(1.05); }
         #gift-btn-2:hover { transform: rotate(8deg) translateY(-15px) scale(1.05); }
         #gift-btn-3:hover { transform: translateX(-50%) rotate(-2deg) translateY(-15px) scale(1.05); }
 
-        /* Animation for Opening */
         .gift-img.opening {
             animation: openBoxAnim 0.8s forwards ease-in-out !important;
             pointer-events: none;
@@ -107,34 +110,56 @@
              100% { transform: scale(2) translateY(-100px); opacity: 0; filter: brightness(3); }
         }
 
-        /* --- GENERAL ELEMENTS --- */
-        h1 { color: var(--primary-red); margin: 0 0 15px 0; font-size: 1.8rem; }
-        p { color: var(--text-color); line-height: 1.6; font-size: 1.1rem; margin: 10px 0; }
+        /* --- TYPOGRAPHY --- */
+        h1, h2 { 
+            font-family: 'Sacramento', cursive; 
+            font-size: 2.8rem; 
+            margin: 0 0 10px 0;
+            background: linear-gradient(45deg, #c0392b, #d4ac0d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .handwritten-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem; 
+            line-height: 1.4;
+            color: var(--rose-text);
+            margin: 10px 0;
+        }
         
+        .normal-text {
+            color: #5d4037; font-size: 1rem; margin: 10px 0; opacity: 0.8;
+        }
+
+        .highlight { 
+            color: var(--primary-red); 
+            font-weight: bold; 
+            text-decoration: underline wavy var(--gold); 
+        }
+
         .start-btn {
             background: var(--primary-red);
             color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: bold;
         }
 
-        .highlight { color: var(--primary-red); font-weight: bold; background: #ffebee; padding: 2px 8px; border-radius: 5px; }
-
         .back-btn {
             background: white; border: 2px solid var(--primary-red); color: var(--primary-red); padding: 10px 25px;
             border-radius: 20px; margin-top: 25px; cursor: pointer; font-weight: bold;
         }
 
-        /* --- MUSIC PLAYER STYLES --- */
+        /* --- MUSIC PLAYER --- */
         .music-card-content { width: 100%; display: flex; flex-direction: column; align-items: center; }
         
-        /* Updated for GIF display */
         .album-cover {
             width: 100%; max-width: 280px; height: 280px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             object-fit: cover;
             margin-bottom: 20px;
-            background: #000; /* Placeholder color while loading */
+            background: #000;
         }
 
         .music-info { text-align: center; margin-bottom: 10px; }
@@ -177,10 +202,10 @@
 <div class="container">
 
     <div class="content-screen" id="intro" style="display: flex;">
-        <h1>Hey Althea 🎄</h1>
+        <h1 style="font-family: 'Sacramento', cursive; font-size: 3rem;">Hey Althea 🎄</h1>
         <img src="https://media.tenor.com/CMi8MQ1d6-MAAAAM/christmas-cat.gif" style="width: 180px; border-radius: 15px; margin-bottom: 20px;">
-        <p>I have a surprise for you.</p>
-        <p style="font-size: 0.9rem; opacity: 0.8;">(Turn volume up 🔊)</p>
+        <p class="handwritten-text" style="font-size: 1.5rem;">I have a surprise for you.</p>
+        <p class="normal-text">(Turn volume up 🔊)</p>
         <button class="start-btn" onclick="startExperience()">Open Gift</button>
     </div>
 
@@ -191,11 +216,11 @@
     </div>
 
     <div class="content-screen" id="gift1">
-        <h2 style="color:var(--primary-red)">My Note</h2>
-        <div style="text-align: left; background: #fff; padding: 20px; border-radius: 15px; border: 1px dashed #ccc; width: 100%; box-sizing: border-box;">
-            <p>Dear <span class="highlight">Althea</span>,</p>
-            <p>Christmas feels a little warmer this year, and I think that's your fault (in a good way). 😉</p>
-            <p>You bring so much comfort and light into my world just by being you.</p>
+        <h2>My Note</h2>
+        <div style="text-align: left; background: #fff; padding: 20px; border-radius: 15px; border: 1px dashed #e1bee7; width: 100%; box-sizing: border-box;">
+            <p class="handwritten-text">Dear <span class="highlight">Althea</span>,</p>
+            <p class="handwritten-text">I don't say this enough, but you’ve quietly become one of my favorite people.</p>
+            <p class="handwritten-text">Whether we're joking around or just talking, you bring a kind of comfort that’s hard to find. You make my world feel a little calmer and a whole lot brighter.</p>
         </div>
         <button class="back-btn" onclick="goBackToHub()">Close Box</button>
     </div>
@@ -205,7 +230,7 @@
             <img src="https://media.tenor.com/Mu5ivBULfHUAAAA1/dvdhult-original-vid-tiktok.webp" class="album-cover" alt="Vibing Cat">
             
             <div class="music-info">
-                <p style="font-size: 1.2rem; color: var(--primary-red); margin: 10px 0;">...here this song for you <3</p>
+                <p class="handwritten-text" style="color: var(--primary-red); font-size: 1.8rem;">...here is this song for you <3</p>
             </div>
 
             <div class="progress-container">
@@ -226,18 +251,17 @@
 
     <div class="content-screen" id="gift3">
         <h1>The Best Gift...</h1>
-        <p>I was thinking about what the best part of my 2025 was.</p>
+        <p class="handwritten-text" style="font-size: 1.4rem;">I was thinking about what the best part of my 2025 was.</p>
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTBlbGF2cm9kN2hxa2tnYnE4ZGw3aXo3MjdxZzZyZjJxMmtubWcxMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1JmGiBtqTuehfYxuy9/giphy.gif" style="width:150px; border-radius:15px; margin: 15px 0;">
-        <p>Honestly? It was becoming friends with you.</p>
+        <p class="handwritten-text" style="font-size: 1.5rem; color: #d32f2f;">Honestly? It was becoming friends with you.</p>
         <button class="mwehehe-btn" onclick="toggleMwehehe()">🔊 MWEHEHEHE...</button>
-        <p class="highlight" style="margin-top: 20px;">Merry Christmas, Althea. ❤️</p>
+        <p class="handwritten-text" style="margin-top: 20px; font-weight:bold;">Merry Christmas, Althea. ❤️</p>
         <button class="back-btn" onclick="location.reload()">Replay All 🔄</button>
     </div>
 
 </div>
 
 <script>
-    // --- VARIABLES ---
     const bgm = document.getElementById('bgm');
     const goldenHour = document.getElementById('goldenHour');
     const mweheheAudio = document.getElementById('mweheheAudio');
@@ -245,7 +269,6 @@
     const musicScreen = document.getElementById('gift2');
     const progBar = document.getElementById('progBar');
 
-    // --- HELPER: Hide all screens ---
     function hideAll() {
         document.getElementById('intro').style.display = 'none';
         document.getElementById('hub-screen').style.display = 'none';
@@ -254,7 +277,6 @@
         document.getElementById('gift3').style.display = 'none';
     }
 
-    // --- 1. START EXPERIENCE ---
     function startExperience() {
         hideAll();
         document.getElementById('hub-screen').style.display = 'block'; 
@@ -262,7 +284,6 @@
         bgm.play().catch(e => console.log("Audio blocked"));
     }
 
-    // --- 2. OPEN GIFTS ---
     function triggerOpen(number) {
         const giftImg = document.getElementById('gift-btn-' + number);
         giftImg.classList.add('opening');
@@ -279,7 +300,6 @@
         if(bgm.paused && goldenHour.paused && mweheheAudio.paused) bgm.play();
     }
 
-    // --- 3. MUSIC PLAYERS ---
     function toggleMusic() {
         if (goldenHour.paused) {
             bgm.pause(); goldenHour.play();
